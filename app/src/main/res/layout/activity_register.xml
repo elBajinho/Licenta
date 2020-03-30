@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
+
+    <TextView
+        android:id="@+id/Register_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="Hike with us today!"
+        android:layout_marginTop="150dp"
+        android:textColor="@color/colorPrimaryWhite"
+        android:textSize="30sp"
+        android:textStyle="bold"
+
+        />
+
+    <EditText
+        android:id="@+id/Register_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignTop="@+id/Register_title"
+        android:layout_marginTop="70dp"
+        android:hint="Username"
+        android:background="@color/colorPrimaryWhite"
+        android:ems="10"
+        android:drawableLeft="@drawable/ic_directions_walk_white_24dp"
+        />
+
+    <EditText
+        android:id="@+id/Register_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignTop="@+id/Register_username"
+        android:layout_marginTop="60dp"
+        android:hint="Password"
+        android:background="@color/colorPrimaryWhite"
+        android:ems="10"
+        android:drawableLeft="@drawable/ic_lock_white_24dp"
+        />
+
+    <EditText
+        android:id="@+id/Register_repeat_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignTop="@+id/Register_password"
+        android:layout_marginTop="60dp"
+        android:hint="Repeat password"
+        android:background="@color/colorPrimaryWhite"
+        android:ems="10"
+        android:drawableLeft="@drawable/ic_lock_white_24dp"
+        />
+
+    <EditText
+        android:id="@+id/Register_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignTop="@+id/Register_repeat_password"
+        android:layout_marginTop="60dp"
+        android:hint="Email"
+        android:background="@color/colorPrimaryWhite"
+        android:ems="10"
+        android:drawableLeft="@drawable/ic_lock_white_24dp"
+        />
+
+    <Button
+        android:id="@+id/register_button"
+        android:layout_width="143dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/Register_email"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/mybutton"
+        android:text="Register now"
+        />
+
+</RelativeLayout>

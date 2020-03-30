@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mountainair.Model.Post
 import com.example.mountainair.R
 import com.squareup.picasso.Picasso
-import org.w3c.dom.Text
 
 class PostsAdapter(val context: Context, val posts : ArrayList<Post>) : RecyclerView.Adapter<PostsAdapter.ViewHolder>(){
 
@@ -23,7 +22,7 @@ class PostsAdapter(val context: Context, val posts : ArrayList<Post>) : Recycler
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view : View = LayoutInflater.from(parent.context).inflate(R.layout.post_row,parent,false)
+        val view : View = LayoutInflater.from(parent.context).inflate(R.layout.fedd_post_row,parent,false)
         return ViewHolder(view)
     }
 
