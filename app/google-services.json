@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "608407146746",
+    "firebase_url": "https://mountainair-7a9b6.firebaseio.com",
+    "project_id": "mountainair-7a9b6",
+    "storage_bucket": "mountainair-7a9b6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:608407146746:android:57e1bebf50f2ee69e2f943",
+        "android_client_info": {
+          "package_name": "com.example.mountainair"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "608407146746-f9bvl2p164fltob2b85arjahrlji04o8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mountainair",
+            "certificate_hash": "722606e42c3457a65074f1a2b239107ab33fd41c"
+          }
+        },
+        {
+          "client_id": "608407146746-7vn89kn3m47ge2n2egsdo8on4i1hivb9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_mq6dIqZj1J_Y-FDFfwwDOtGj6m2wWww"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "608407146746-7vn89kn3m47ge2n2egsdo8on4i1hivb9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

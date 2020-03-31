@@ -71,7 +71,7 @@
         />
 
     <Button
-        android:id="@+id/register_button"
+        android:id="@+id/Register_button"
         android:layout_width="143dp"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/Register_email"
