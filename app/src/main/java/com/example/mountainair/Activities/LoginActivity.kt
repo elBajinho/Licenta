@@ -30,6 +30,7 @@ class LoginActivity : AppCompatActivity() {
                     if (task.isSuccessful) {
                         val intent = Intent(this, FeddActivity::class.java)
                         startActivity(intent)
+                        finish()
                     } else {
                         Toast.makeText(baseContext, "fuck you go to hell and fuck you again",
                             Toast.LENGTH_SHORT).show()

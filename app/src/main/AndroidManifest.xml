@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.mountainair">
     <uses-permission android:name="android.permission.INTERNET"/>
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -24,6 +24,10 @@
         <activity android:name=".Activities.LoginActivity">
         </activity>
         <activity android:name=".Activities.RegisterActivity">
+        </activity>
+        <activity android:name=".Activities.UpdateProfileActivity">
+        </activity>
+        <activity android:name=".Activities.MyPostsActivity">
         </activity>
     </application>
 

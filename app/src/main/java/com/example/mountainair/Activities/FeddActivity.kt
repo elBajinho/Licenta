@@ -1,5 +1,6 @@
 package com.example.mountainair.Activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
@@ -13,6 +14,7 @@ import com.example.mountainair.Adapters.PostsAdapter
 import com.example.mountainair.Model.Post
 import com.example.mountainair.R
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_feed.*
 import kotlinx.android.synthetic.main.fedd_main.*
 
@@ -21,17 +23,17 @@ class FeddActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     lateinit var toolbar: Toolbar
     lateinit var drawerLayout: DrawerLayout
     lateinit var navView: NavigationView
+    lateinit var auth : FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_feed)
-
+        auth = FirebaseAuth.getInstance()
 
         var posts : ArrayList<Post> = ArrayList()
         for(i in 0..100){
             posts.add(Post("Vlad","muntii  astia th0", "https://picsum.photos/600/300?random&"+i))
         }
-
 
         recyclerFeed.layoutManager = LinearLayoutManager(this)
         recyclerFeed.adapter = PostsAdapter(this, posts)
@@ -55,24 +57,42 @@ class FeddActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.nav_profile -> {
-                Toast.makeText(this, "Profile clicked", Toast.LENGTH_SHORT).show()
+            R.id.nav_post -> {
+                Toast.makeText(this, "Post clicked", Toast.LENGTH_SHORT).show()
             }
-            R.id.nav_messages -> {
-                Toast.makeText(this, "Messages clicked", Toast.LENGTH_SHORT).show()
+            R.id.nav_my_posts -> {
+                goToMyPosts()
             }
-            R.id.nav_friends -> {
-                Toast.makeText(this, "Friends clicked", Toast.LENGTH_SHORT).show()
+            R.id.nav_create_your_journey -> {
+                Toast.makeText(this, "Journey clicked", Toast.LENGTH_SHORT).show()
             }
             R.id.nav_update -> {
-                Toast.makeText(this, "Update clicked", Toast.LENGTH_SHORT).show()
+                goToUpdate()
             }
             R.id.nav_logout -> {
-                Toast.makeText(this, "Sign out clicked", Toast.LENGTH_SHORT).show()
+                signOut()
             }
         }
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    fun signOut(){
+        auth.signOut()
+        var intent = Intent(this, LoginActivity::class.java)
+        Intent.FLAG_ACTIVITY_NO_HISTORY
+        startActivity(intent)
+        finish()
+    }
+
+    fun goToUpdate(){
+        var intent = Intent(this, UpdateProfileActivity::class.java)
+        startActivity(intent)
+    }
+
+    fun goToMyPosts(){
+        var intent = Intent(this, MyPostsActivity::class.java)
+        startActivity(intent)
     }
 
 }

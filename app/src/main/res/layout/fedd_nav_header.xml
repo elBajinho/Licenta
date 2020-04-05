@@ -20,14 +20,14 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Title"
+        android:text="USERNAME"
         android:textColor="#FFFFFF"
         android:textStyle="bold"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="This is our navigation drawer"
+        android:text="The adventure starts with you"
         android:textColor="#FFFFFF"/>
 
 </LinearLayout>
