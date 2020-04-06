@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.mountainair">
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -28,6 +29,8 @@
         <activity android:name=".Activities.UpdateProfileActivity">
         </activity>
         <activity android:name=".Activities.MyPostsActivity">
+        </activity>
+        <activity android:name=".Activities.PostActivity">
         </activity>
     </application>
 

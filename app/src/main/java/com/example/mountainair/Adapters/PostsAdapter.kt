@@ -16,7 +16,7 @@ class PostsAdapter(val context: Context, val posts : ArrayList<Post>) : Recycler
     override fun getItemCount()= posts.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.username.text=posts[position].username
+        holder.username.text=posts[position].userId
         holder.description.text=posts[position].description
         Picasso.with(context).load(posts[position].photo).into(holder.photo)
     }

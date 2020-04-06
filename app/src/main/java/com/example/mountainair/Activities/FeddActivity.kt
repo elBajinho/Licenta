@@ -58,7 +58,7 @@ class FeddActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.nav_post -> {
-                Toast.makeText(this, "Post clicked", Toast.LENGTH_SHORT).show()
+                goToPost()
             }
             R.id.nav_my_posts -> {
                 goToMyPosts()
@@ -92,6 +92,11 @@ class FeddActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     fun goToMyPosts(){
         var intent = Intent(this, MyPostsActivity::class.java)
+        startActivity(intent)
+    }
+
+    fun goToPost(){
+        var intent = Intent(this, PostActivity::class.java)
         startActivity(intent)
     }
 
