@@ -8,18 +8,26 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.mountainair.Model.Post
+import com.example.mountainair.Model.PostToDisplay
 import com.example.mountainair.R
 import com.squareup.picasso.Picasso
 
-class MyPostsAdapter(val context: Context, val posts : ArrayList<Post>) : RecyclerView.Adapter<MyPostsAdapter.ViewHolder>(){
+class MyPostsAdapter(val context: Context, val posts : ArrayList<PostToDisplay>) : RecyclerView.Adapter<MyPostsAdapter.ViewHolder>(){
 
     override fun getItemCount()= posts.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.username.text=posts[position].userId
+        holder.username.text=posts[position].userName
         holder.description.hint=posts[position].description
-        Picasso.with(context).load(posts[position].photo).into(holder.photo)
+        //Picasso.with(context).load(posts[position].photo).into(holder.photo)
+        Glide.with(context)
+            .load(posts[position].photo)
+            .diskCacheStrategy(DiskCacheStrategy.NONE)
+            .skipMemoryCache(true)
+            .into(holder.photo)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

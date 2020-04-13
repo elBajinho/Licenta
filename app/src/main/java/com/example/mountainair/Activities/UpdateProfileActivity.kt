@@ -7,7 +7,10 @@ import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.mountainair.R
+import com.example.mountainair.Server.Server
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
@@ -23,10 +26,17 @@ class UpdateProfileActivity : AppCompatActivity(){
     var storageRef = storage.reference
     var database: DatabaseReference = Firebase.database.reference
     var userId : String = FirebaseAuth.getInstance().getCurrentUser()!!.getUid()
+    var server : Server = Server()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_update_profile)
+
+        Glide.with(this)
+           .load(server.getAvatarReference(userId))
+            .diskCacheStrategy(DiskCacheStrategy.NONE)
+            .skipMemoryCache(true)
+            .into(update_profile_image)
 
         update_profile_button.setOnClickListener {
             var intent = Intent(this, FeddActivity::class.java)
@@ -39,7 +49,6 @@ class UpdateProfileActivity : AppCompatActivity(){
 
         update_profile_button.setOnClickListener {
             uploadImage()
-            goToFedd()
         }
     }
 
@@ -79,6 +88,7 @@ class UpdateProfileActivity : AppCompatActivity(){
 
             database.child("users").child(userId).child("username").setValue(update_profile_username.text.toString())
             Toast.makeText(this,"well fuck", Toast.LENGTH_SHORT).show()
+            goToFedd()
         }
     }
 
@@ -86,6 +96,7 @@ class UpdateProfileActivity : AppCompatActivity(){
         intent = Intent(this, FeddActivity::class.java)
         startActivity(intent)
         Toast.makeText(this, "Your avatar have been uploaded", Toast.LENGTH_SHORT).show()
+        finish()
     }
 
 

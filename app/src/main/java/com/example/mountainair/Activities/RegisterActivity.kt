@@ -19,7 +19,6 @@ import kotlinx.android.synthetic.main.activity_register.*
 class RegisterActivity : AppCompatActivity(){
     private lateinit var auth: FirebaseAuth
     private lateinit var database: DatabaseReference
-    private var userRef = FirebaseDatabase.getInstance().getReference().child("mountainair-7a9b6").child("users")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,6 +48,20 @@ class RegisterActivity : AppCompatActivity(){
             Register_password.requestFocus()
             return
         }
+
+        if(Register_password.text.toString().length<9){
+            Register_password.error="your password shall have at least 9 characters"
+            Register_password.requestFocus()
+            return
+        }
+
+        if(!Register_password.text.toString().equals(Register_repeat_password.text.toString())){
+            Register_repeat_password.error="Entered password are not equal"
+            Register_repeat_password.requestFocus()
+            return
+        }
+
+
 
         auth.createUserWithEmailAndPassword(Register_email.text.toString(), Register_password.text.toString())
             .addOnCompleteListener(this) { task ->

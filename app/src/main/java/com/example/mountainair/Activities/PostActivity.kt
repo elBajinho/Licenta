@@ -9,7 +9,9 @@ import android.app.Activity
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.widget.Toast
+import com.example.mountainair.Interfaces.SimpleCallback
 import com.example.mountainair.Model.Post
+import com.example.mountainair.Server.Server
 import com.google.android.gms.auth.api.signin.internal.Storage
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
@@ -27,11 +29,17 @@ class PostActivity : AppCompatActivity(){
     var storageRef = storage.reference
     var database: DatabaseReference = Firebase.database.reference
     var userId : String = FirebaseAuth.getInstance().getCurrentUser()!!.getUid()
-
+    var server : Server = Server()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(com.example.mountainair.R.layout.activity_post)
+
+        server.getUsernameWithUID(userId, object: SimpleCallback<String>{
+            override fun callback(data: String) {
+                post_username.text = data
+            }
+        })
 
         post_imageId.setOnClickListener{
             pickImage()
@@ -39,12 +47,12 @@ class PostActivity : AppCompatActivity(){
 
         post_button.setOnClickListener {
             uploadImage()
-            goToFedd()
+            //goToFedd()
         }
 
     }
 
-    fun uploadImage(){
+    fun uploadImage() {
 
         post_imageId.isDrawingCacheEnabled = true
         post_imageId.buildDrawingCache()
@@ -62,12 +70,14 @@ class PostActivity : AppCompatActivity(){
         uploadTask.addOnFailureListener {
 
             Toast.makeText(this,"well",Toast.LENGTH_SHORT).show()
+            goToFedd()
         }.addOnSuccessListener {
 
             var post= Post(userId, post_description.text.toString(), now)
             database.child("posts").child(now+"User:"+userId).setValue(post)
 
             Toast.makeText(this,"well fuck", Toast.LENGTH_SHORT).show()
+            goToFedd()
         }
     }
 
