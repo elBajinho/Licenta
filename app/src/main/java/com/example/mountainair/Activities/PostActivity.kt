@@ -69,14 +69,12 @@ class PostActivity : AppCompatActivity(){
         var uploadTask = imageRef.putBytes(data)
         uploadTask.addOnFailureListener {
 
-            Toast.makeText(this,"well",Toast.LENGTH_SHORT).show()
             goToFedd()
         }.addOnSuccessListener {
 
             var post= Post(userId, post_description.text.toString(), now)
             database.child("posts").child(now+"User:"+userId).setValue(post)
 
-            Toast.makeText(this,"well fuck", Toast.LENGTH_SHORT).show()
             goToFedd()
         }
     }

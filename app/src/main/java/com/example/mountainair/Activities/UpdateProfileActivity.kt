@@ -63,10 +63,8 @@ class UpdateProfileActivity : AppCompatActivity(){
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK && requestCode == PICK_IMAGE){
             update_profile_image.setImageURI(data?.data)
-            Toast.makeText(this,data.toString(), Toast.LENGTH_SHORT).show()
         }
-        else
-            Toast.makeText(this,"nope", Toast.LENGTH_SHORT).show()
+
     }
 
     fun uploadImage(){
@@ -83,11 +81,9 @@ class UpdateProfileActivity : AppCompatActivity(){
 
         var uploadTask = avatarRef.putBytes(data)
         uploadTask.addOnFailureListener {
-            Toast.makeText(this,"well",Toast.LENGTH_SHORT).show()
         }.addOnSuccessListener {
 
             database.child("users").child(userId).child("username").setValue(update_profile_username.text.toString())
-            Toast.makeText(this,"well fuck", Toast.LENGTH_SHORT).show()
             goToFedd()
         }
     }
@@ -98,6 +94,4 @@ class UpdateProfileActivity : AppCompatActivity(){
         Toast.makeText(this, "Your avatar have been uploaded", Toast.LENGTH_SHORT).show()
         finish()
     }
-
-
 }

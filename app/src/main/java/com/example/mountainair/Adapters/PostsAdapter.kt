@@ -23,7 +23,7 @@ class PostsAdapter(val context: Context, val posts : ArrayList<PostToDisplay>) :
         holder.description.text=posts[position].description
         //Picasso.with(context).load(posts[position].photo).into(holder.photo)
         Glide.with(context)
-            .load(posts[position].photo)
+            .load(posts[position].photoRef)
             .diskCacheStrategy(DiskCacheStrategy.NONE)
             .skipMemoryCache(true)
             .into(holder.photo)

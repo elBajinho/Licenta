@@ -58,7 +58,6 @@ class FeddActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 for (postSnapshot in dataSnapshot.children) {
-                    Log.i("aici",postSnapshot.toString())
 
                     var description :String = postSnapshot.child("description").getValue().toString()
                     var photo : StorageReference = storageReference.child("images").child(postSnapshot.child("userId").getValue().toString()).child(postSnapshot.child("photo").getValue().toString())
@@ -70,7 +69,6 @@ class FeddActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
                             var postToDisplay = PostToDisplay(username,description,photo)
                             postsToDisplay.add(postToDisplay)
-                            Log.i("aici", "" + postsToDisplay.size)
                             recyclerFeed.layoutManager = LinearLayoutManager(context)
                             recyclerFeed.adapter = PostsAdapter(context, postsToDisplay)
                         }

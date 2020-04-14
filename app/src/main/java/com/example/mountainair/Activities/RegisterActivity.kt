@@ -69,12 +69,10 @@ class RegisterActivity : AppCompatActivity(){
                     val user = User(Register_username.text.toString(), Register_email.text.toString())
                     val userId : String = FirebaseAuth.getInstance().getCurrentUser()!!.getUid()
 
-                    Toast.makeText(baseContext, userId,Toast.LENGTH_SHORT).show()
 
                     database.child("users").child(userId).child("username").setValue(user.username).addOnFailureListener{
                             Toast.makeText(baseContext, "nu o fost introdus", Toast.LENGTH_SHORT)
                                 .show()
-                            Log.i("plm",it.toString())
 
                     }
 

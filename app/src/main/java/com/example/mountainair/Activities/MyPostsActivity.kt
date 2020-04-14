@@ -1,6 +1,7 @@
 package com.example.mountainair.Activities
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -48,22 +49,20 @@ class MyPostsActivity : AppCompatActivity(){
             override fun onDataChange(dataSnapshot: DataSnapshot) {
 
                 for (postSnapshot in dataSnapshot.children) {
-                    Log.i("aici_post",postSnapshot.toString())
 
                     var description :String = postSnapshot.child("description").getValue().toString()
-                    var photo : StorageReference = storageReference.child("images").child(postSnapshot.child("userId").getValue().toString()).child(postSnapshot.child("photo").getValue().toString())
+                    var photoRef : StorageReference = storageReference.child("images").child(postSnapshot.child("userId").getValue().toString()).child(postSnapshot.child("photo").getValue().toString())
                     var username: String =""
+                    var photo =postSnapshot.child("photo").getValue().toString()
 
                     if(userId.equals(postSnapshot.child("userId").getValue().toString())) {
-                        Toast.makeText(context, "ceva",Toast.LENGTH_LONG).show()
                         getUsername(postSnapshot.child("userId").getValue().toString(), object :
                             SimpleCallback<String> {
                             override fun callback(data: String) {
                                 username = data
 
-                                var postToDisplay = PostToDisplay(username, description, photo)
+                                var postToDisplay = PostToDisplay(username, description, photoRef, photo, userId)
                                 postsToDisplay.add(postToDisplay)
-                                Log.i("aici_post", "" + postsToDisplay.size)
 
                                 myPostsRecyclerView.layoutManager = LinearLayoutManager(context)
                                 myPostsRecyclerView.adapter = MyPostsAdapter(context, postsToDisplay)
@@ -76,6 +75,19 @@ class MyPostsActivity : AppCompatActivity(){
             }
         }
         ref.addListenerForSingleValueEvent(postListener)
+
+
+        my_post_button.setOnClickListener{
+            goToFedd()
+        }
+
+    }
+
+    fun goToFedd(){
+        intent = Intent(this, FeddActivity::class.java)
+        startActivity(intent)
+        Toast.makeText(this, "Your avatar have been uploaded", Toast.LENGTH_SHORT).show()
+        finish()
     }
 
     fun getUsername(userId : String, @NonNull finishedCallback : SimpleCallback<String>){
