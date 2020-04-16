@@ -5,6 +5,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.NonNull
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -14,6 +16,7 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.mountainair.Adapters.PostsAdapter
 import com.example.mountainair.Interfaces.SimpleCallback
 import com.example.mountainair.Model.Post
@@ -137,6 +140,26 @@ class FeddActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
         navView.setNavigationItemSelectedListener(this)
+        var headerview : android.view.View? = nav_view.getHeaderView(0)
+        var headerImgView : ImageView =  headerview!!.findViewById(R.id.drawer_header_imageView)
+        var headerUsername : TextView = headerview!!.findViewById(R.id.drawer_header_username)
+
+        headerImgView.getLayoutParams().width = 250;
+        headerImgView.getLayoutParams().height = 250;
+        headerImgView.setAdjustViewBounds(true);
+
+
+            Glide.with(this)
+                .load(server.getAvatarReference(userId))
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true)
+                .into(headerImgView)
+
+        server.getUsernameWithUID(userId,object  : SimpleCallback<String>{
+            override fun callback(data: String) {
+                headerUsername.text = data
+            }
+        })
     }
 
     fun signOut(){
@@ -149,8 +172,6 @@ class FeddActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     fun goToUpdate(){
         var intent = Intent(this, UpdateProfileActivity::class.java)
-
-        finish()
         startActivity(intent)
     }
 

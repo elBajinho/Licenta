@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
+import android.view.KeyEvent
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
@@ -50,6 +51,7 @@ class UpdateProfileActivity : AppCompatActivity(){
         update_profile_button.setOnClickListener {
             uploadImage()
         }
+
     }
 
     fun pickImage(){

@@ -11,36 +11,35 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/imageId"
-        android:layout_width="0dp"
-        android:layout_height="300dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@color/colorPrimary"
-        android:scaleType="centerCrop"
-        ></androidx.appcompat.widget.AppCompatImageView>
+        <TextView
+            android:id="@+id/post_row_username"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="text de baza"
+            android:textSize="20dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/post_row_username"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="text de baza"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imageId"/>
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageId"
+            android:layout_width="0dp"
+            android:layout_height="300dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/post_row_username"
+            tools:src="@color/colorPrimary"
+            android:scaleType="centerCrop"
+            ></androidx.appcompat.widget.AppCompatImageView>
 
-    <TextView
-        android:id="@+id/post_row_description_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="6dp"
-        android:text="descriere"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/post_row_username" />
+        <TextView
+            android:id="@+id/post_row_description_id"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="6dp"
+            android:text="descriere"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageId" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

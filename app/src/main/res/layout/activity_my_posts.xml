@@ -3,12 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryWhite">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/myPostsRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="531dp" />
+        android:layout_height="match_parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/my_post_button"

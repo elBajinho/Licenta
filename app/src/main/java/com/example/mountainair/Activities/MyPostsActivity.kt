@@ -104,4 +104,12 @@ class MyPostsActivity : AppCompatActivity(){
         }
         ref.addValueEventListener(userListener)
     }
+
+    override fun onBackPressed() {
+        intent = Intent(this, FeddActivity::class.java)
+        startActivity(intent)
+        Toast.makeText(this, "Your avatar have been uploaded", Toast.LENGTH_SHORT).show()
+        finish()
+    }
+
 }
