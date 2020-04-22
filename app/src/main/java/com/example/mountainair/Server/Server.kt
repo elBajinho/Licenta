@@ -6,10 +6,6 @@ import android.graphics.drawable.BitmapDrawable
 import android.util.Log
 import com.example.mountainair.Interfaces.SimpleCallback
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.StorageReference
@@ -19,7 +15,10 @@ import com.google.android.gms.tasks.OnSuccessListener
 import kotlinx.android.synthetic.main.activity_update_profile.*
 import java.io.ByteArrayOutputStream
 import androidx.annotation.NonNull
-
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.mountainair.Adapters.ActivitiesFragmentAdapter
+import com.google.firebase.database.*
+import kotlinx.android.synthetic.main.fragment_activities.*
 
 
 class Server() {
@@ -45,6 +44,24 @@ class Server() {
                 }
             }
             ref.addValueEventListener(userListener)
+    }
+
+    fun getActivities(finishedCallback : SimpleCallback<ArrayList<String>>){
+        var list : ArrayList<String> = ArrayList()
+        var ref :DatabaseReference = FirebaseDatabase.getInstance().getReference("activities")
+        val activitiesListener = object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {
+            }
+
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (activitySnapshot in dataSnapshot.children) {
+                    var activity = activitySnapshot.child("name").getValue().toString()
+                    list.add(activity)
+                }
+                finishedCallback.callback(list)
+            }
+        }
+        ref.addListenerForSingleValueEvent(activitiesListener)
     }
 
     fun getAvatarReference(uid: String) : StorageReference?{

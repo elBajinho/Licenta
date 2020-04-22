@@ -100,7 +100,7 @@ class FeddActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 goToMyPosts()
             }
             R.id.nav_create_your_journey -> {
-                Toast.makeText(this, "Journey clicked", Toast.LENGTH_SHORT).show()
+                goToDoYourJurney()
             }
             R.id.nav_update -> {
                 goToUpdate()
@@ -182,6 +182,11 @@ class FeddActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     fun goToPost(){
         var intent = Intent(this, PostActivity::class.java)
+        startActivity(intent)
+    }
+
+    fun goToDoYourJurney(){
+        var intent = Intent(this, DoYourJurneyActivity::class.java)
         startActivity(intent)
     }
 
