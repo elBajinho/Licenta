@@ -64,6 +64,92 @@ class Server() {
         ref.addListenerForSingleValueEvent(activitiesListener)
     }
 
+    fun getCharpats(finishedCallback: SimpleCallback<ArrayList<String>>){
+        var list : ArrayList<String> = ArrayList()
+        var ref : DatabaseReference = FirebaseDatabase.getInstance().getReference("Arii")
+
+        val carpatsListener = object : ValueEventListener{
+            override fun onCancelled(p0: DatabaseError) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                list.add("oricare")
+                for(carpatsSnashot in dataSnapshot.children){
+                 list.add(carpatsSnashot.child("Nume").getValue().toString())
+                }
+                finishedCallback.callback(list)
+            }
+        }
+        ref.addListenerForSingleValueEvent(carpatsListener)
+    }
+
+    fun getMountains(finishedCallback: SimpleCallback<ArrayList<String>>){
+        var list : ArrayList<String> = ArrayList()
+        var ref : DatabaseReference = database.child("Arii")
+
+        val mountainsListener = object : ValueEventListener{
+            override fun onCancelled(p0: DatabaseError) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                list.add("oricare")
+                for(carpatsSnashot in dataSnapshot.children){
+                    for(mountainsSnapshot in  carpatsSnashot.children){
+                        for(finalSnapshot in mountainsSnapshot.children) {
+                            list.add(finalSnapshot.child("Nume").getValue().toString())
+                        }
+                    }
+                }
+                finishedCallback.callback(list)
+            }
+        }
+        ref.addListenerForSingleValueEvent(mountainsListener)
+    }
+
+    fun getPeaks(finishedCallback: SimpleCallback<ArrayList<String>>){
+        var list : ArrayList<String> = ArrayList()
+        var ref : DatabaseReference = database.child("Varfuri")
+
+        val peaksListener = object : ValueEventListener{
+            override fun onCancelled(p0: DatabaseError) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                list.add("oricare")
+                for(peaksSnapshot in dataSnapshot.children){
+                    list.add(peaksSnapshot.child("Nume").getValue().toString())
+                }
+                finishedCallback.callback(list)
+            }
+        }
+        ref.addListenerForSingleValueEvent(peaksListener)
+    }
+
+    fun getJudete(finishedCallback: SimpleCallback<ArrayList<String>>){
+        var list : ArrayList<String> = ArrayList()
+        var ref : DatabaseReference = database.child("Judete")
+
+        val judeteListener = object : ValueEventListener{
+            override fun onCancelled(p0: DatabaseError) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                list.add("oricare")
+                for(judeteSnapshot in dataSnapshot.children){
+                    list.add(judeteSnapshot.child("Nume").getValue().toString())
+                }
+                finishedCallback.callback(list)
+            }
+        }
+        ref.addListenerForSingleValueEvent(judeteListener)
+    }
+
+
+
     fun getAvatarReference(uid: String) : StorageReference?{
         return storageReference.child("images").child(uid).child("avatar")
     }
@@ -94,6 +180,4 @@ class Server() {
     fun updatePost(postId: String, userId: String, description : String){
         var databaseRef = database.child("posts").child(postId+"User:"+userId).child("description").setValue(description)
     }
-
-
 }

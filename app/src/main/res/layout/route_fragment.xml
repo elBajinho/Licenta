@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.RouteFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary">
+
+        <TextView
+            android:id="@+id/fragment_route_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="30dp"
+            android:text="Add some route details"
+            android:textColor="@color/colorPrimaryWhite"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/fragment_route_hours_min_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/fragment_route_text"
+            android:layout_marginTop="100dp"
+            android:layout_centerHorizontal="true"
+            android:text="Minimum hours: "
+            android:textColor="@color/colorPrimaryWhite"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+
+        <SeekBar
+            android:id="@+id/seekBar_route_minHours"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/fragment_route_hours_min_text"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="50dp"
+            android:max="30"
+            android:min="0" />
+
+        <TextView
+            android:id="@+id/min_hours"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/seekBar_route_minHours"
+            android:layout_marginTop="30dp"
+            android:layout_centerHorizontal="true"
+            android:text="h"
+            android:textColor="@color/colorPrimaryWhite"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/fragment_route_hours_max_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/seekBar_route_minHours"
+            android:layout_marginTop="100dp"
+            android:layout_centerHorizontal="true"
+            android:text="Maximum hours"
+            android:textColor="@color/colorPrimaryWhite"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+
+        <SeekBar
+            android:id="@+id/seekBar_route_maxHours"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/fragment_route_hours_max_text"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="50dp"
+            android:max="30"
+            android:min="0" />
+
+        <TextView
+            android:id="@+id/max_hours"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/seekBar_route_maxHours"
+            android:layout_marginTop="30dp"
+            android:layout_centerHorizontal="true"
+            android:text="h"
+            android:textColor="@color/colorPrimaryWhite"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/fragment_route_dificulty_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/seekBar_route_maxHours"
+            android:layout_marginTop="100dp"
+            android:layout_centerHorizontal="true"
+            android:text="How difficult shall it be?"
+            android:textColor="@color/colorPrimaryWhite"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/fragment_route_dificulty_text"
+            android:layout_marginTop="40dp"
+            android:layout_centerHorizontal="true"
+            >
+            <CheckBox android:id="@+id/easy_check"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Usor"/>
+            <CheckBox android:id="@+id/medium_check"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Medium"/>
+            <CheckBox android:id="@+id/hard_check"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ridicata"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+</FrameLayout>

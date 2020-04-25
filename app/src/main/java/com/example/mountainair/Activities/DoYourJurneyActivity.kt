@@ -19,6 +19,7 @@ class DoYourJurneyActivity : AppCompatActivity(){
         setContentView(R.layout.activity_do_your_journey)
 
         var viewPager :  ViewPager = findViewById(R.id.pager)
+        viewPager.offscreenPageLimit=6
         adapter=DemoFragmentCollectionAdapter(supportFragmentManager)
         viewPager.adapter = adapter
     }

@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.WeatherFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary">
+
+        <TextView
+            android:id="@+id/fragment_wheather_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="30dp"
+            android:text="What about the weather?"
+            android:textColor="@color/colorPrimaryWhite"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/fragment_wheather_wind_min_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/fragment_wheather_text"
+            android:layout_marginTop="70dp"
+            android:layout_centerHorizontal="true"
+            android:text="Minimum wind speed: "
+            android:textColor="@color/colorPrimaryWhite"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+
+        <SeekBar
+            android:id="@+id/seekBar_wheather_minWind"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/fragment_wheather_wind_min_text"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="50dp"
+            android:max="30"
+            android:min="0" />
+
+
+        <TextView
+            android:id="@+id/fragment_wheater_wind_max_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/seekBar_wheather_minWind"
+            android:layout_marginTop="70dp"
+            android:layout_centerHorizontal="true"
+            android:text="Maximum wind speed"
+            android:textColor="@color/colorPrimaryWhite"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+
+        <SeekBar
+            android:id="@+id/seekBar_wheather_maxWind"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/fragment_wheater_wind_max_text"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="50dp"
+            android:max="30"
+            android:min="0" />
+
+
+
+        <TextView
+            android:id="@+id/fragment_wheater_temp_min_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/seekBar_wheather_maxWind"
+            android:layout_marginTop="70dp"
+            android:layout_centerHorizontal="true"
+            android:text="Minimum Temperature "
+            android:textColor="@color/colorPrimaryWhite"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+
+        <SeekBar
+            android:id="@+id/seekbar_wheater_temp_min"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/fragment_wheater_temp_min_text"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="50dp"
+            android:max="40"
+            android:min="0" />
+
+        <TextView
+            android:id="@+id/fragment_wheater_temp_max_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/seekbar_wheater_temp_min"
+            android:layout_marginTop="70dp"
+            android:layout_centerHorizontal="true"
+            android:text="Maximum Temperature "
+            android:textColor="@color/colorPrimaryWhite"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <SeekBar
+            android:id="@+id/seekbar_wheater_temp_max"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/fragment_wheater_temp_max_text"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="50dp"
+            android:max="40"
+            android:min="0" />
+
+        <RelativeLayout
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:layout_alignTop="@+id/seekbar_wheater_temp_max"
+            android:layout_marginTop="25dp"
+            android:layout_centerHorizontal="true"
+            >
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical"
+                android:id="@+id/questionRain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                >
+                <TextView
+                    android:id="@+id/fragment_wheater_questionRain_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mind some rain? "
+                    android:textColor="@color/colorPrimaryWhite"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <CheckBox android:id="@+id/rainYes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Yes"/>
+                <CheckBox android:id="@+id/rainNo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No"/>
+            </LinearLayout>
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/questionFoog"
+                android:layout_marginTop="40dp"
+                android:layout_alignLeft="@+id/questionRain"
+                android:layout_marginLeft="150dp"
+                android:layout_centerHorizontal="true"
+                >
+                <TextView
+                    android:id="@+id/fragment_wheater_questionFoog_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="What about foog?"
+                    android:textColor="@color/colorPrimaryWhite"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <CheckBox android:id="@+id/FoogYes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Yes"/>
+                <CheckBox android:id="@+id/FoogNo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No"/>
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</FrameLayout>

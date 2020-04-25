@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.viewpager.widget.ViewPager
 import com.example.mountainair.Adapters.ActivitiesFragmentAdapter
 import com.example.mountainair.Interfaces.SimpleCallback
 import com.example.mountainair.R
@@ -17,6 +18,7 @@ import kotlinx.android.synthetic.main.fragment_activities.*
 
 
 class ActivitiesFragment : Fragment() {
+    var list : ArrayList<String> = ArrayList()
 
     companion object {
         fun newInstance() = ActivitiesFragment()
@@ -36,7 +38,6 @@ class ActivitiesFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(ActivitiesFragmentViewModel::class.java)
-        var list : ArrayList<String> = ArrayList()
 
         server.getActivities(object : SimpleCallback<ArrayList<String>>{
             override fun callback(data: ArrayList<String>) {
