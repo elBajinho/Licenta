@@ -13,7 +13,6 @@ import android.widget.Toast
 import com.example.mountainair.R
 import kotlinx.android.synthetic.main.date_fragment.*
 import java.util.*
-import javax.xml.datatype.DatatypeConstants.MONTHS
 
 class DateFragment : Fragment() {
 
@@ -22,7 +21,7 @@ class DateFragment : Fragment() {
     }
 
     private lateinit var viewModel: DateFragmentViewModel
-
+    private lateinit var date : Date
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,21 +37,13 @@ class DateFragment : Fragment() {
         datePicker.init(today.get(Calendar.YEAR), today.get(Calendar.MONTH),
             today.get(Calendar.DAY_OF_MONTH)
         ) { view, year, month, day ->
-            val month=month+1
             val msg = "You Selected: $day/$month/$year"
             Toast.makeText(context!! , msg, Toast.LENGTH_SHORT).show()
+            date = Date(year,month,day)
         }
     }
 
-//    fun getDate(): Date{
-//
-//        val today = Calendar.getInstance()
-//        datePicker.init(today.get(Calendar.YEAR), today.get(Calendar.MONTH),
-//            today.get(Calendar.DAY_OF_MONTH)
-//        ) { view, year, month, day ->
-//            val msg = "You Selected: $day/$month/$year"
-//            Toast.makeText(context!! , msg, Toast.LENGTH_SHORT).show()
-//        }
-//    }
-
+    fun getDate() : Date{
+        return date
+    }
 }

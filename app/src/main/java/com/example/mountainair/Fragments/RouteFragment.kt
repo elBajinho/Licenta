@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
 import android.widget.Toast
+import com.example.mountainair.Model.RouteSelection
 
 import com.example.mountainair.R
 import kotlinx.android.synthetic.main.route_fragment.*
@@ -69,6 +70,25 @@ class RouteFragment : Fragment() {
                 Toast.makeText(context!!,"stop tracking",Toast.LENGTH_SHORT).show()
             }
         })
+    }
+
+    fun geRouteSelection() : RouteSelection{
+
+        var listOfDificulties : ArrayList<String> = ArrayList()
+
+        if(easy_check.isChecked){
+            listOfDificulties.add("Usor")
+        }
+
+        if(medium_check.isChecked){
+            listOfDificulties.add("Medium")
+        }
+
+        if(hard_check.isChecked){
+            listOfDificulties.add("Ridicata")
+        }
+
+        return RouteSelection(seekBar_route_minHours.progress, seekBar_route_maxHours.progress,listOfDificulties)
     }
 
 }

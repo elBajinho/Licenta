@@ -174,11 +174,11 @@
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
-                <CheckBox android:id="@+id/FoogYes"
+                <CheckBox android:id="@+id/foogYes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Yes"/>
-                <CheckBox android:id="@+id/FoogNo"
+                <CheckBox android:id="@+id/foogNo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="No"/>

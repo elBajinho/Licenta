@@ -6,7 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Adapter
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.example.mountainair.Adapters.ActivitiesFragmentAdapter
 import com.example.mountainair.Interfaces.SimpleCallback
@@ -26,6 +28,7 @@ class ActivitiesFragment : Fragment() {
 
     private lateinit var viewModel: ActivitiesFragmentViewModel
     private var server : Server = Server()
+    private lateinit var activitiesAdapter : ActivitiesFragmentAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,8 +46,13 @@ class ActivitiesFragment : Fragment() {
             override fun callback(data: ArrayList<String>) {
                 list = data
                 activities_recycler.layoutManager = LinearLayoutManager(context)
-                activities_recycler.adapter = ActivitiesFragmentAdapter(context!!, list)
+                activitiesAdapter = ActivitiesFragmentAdapter(context!!, list)
+                activities_recycler.adapter = activitiesAdapter
             }
         })
+    }
+
+    fun getListOfActivities() : ArrayList<String>{
+        return activitiesAdapter.getListOfActivities()
     }
 }

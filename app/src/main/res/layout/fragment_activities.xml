@@ -27,16 +27,7 @@
         android:layout_height="405dp"
         android:layout_marginTop="50dp" />
 
-    <Button
-        android:id="@+id/activities_next_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="500dp"
-        android:background="@drawable/mybutton"
-        android:text="Next"
-        android:textSize="18sp" />
-    </RelativeLayout>
+
+</RelativeLayout>
 
 </FrameLayout>

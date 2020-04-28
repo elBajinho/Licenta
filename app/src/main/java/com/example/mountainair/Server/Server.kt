@@ -4,6 +4,7 @@ import android.content.ContentValues.TAG
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.util.Log
+import android.widget.Toast
 import com.example.mountainair.Interfaces.SimpleCallback
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.ktx.database
@@ -17,7 +18,9 @@ import java.io.ByteArrayOutputStream
 import androidx.annotation.NonNull
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mountainair.Adapters.ActivitiesFragmentAdapter
+import com.example.mountainair.Model.Route
 import com.google.firebase.database.*
+import com.google.firebase.database.ktx.getValue
 import kotlinx.android.synthetic.main.fragment_activities.*
 
 
@@ -77,6 +80,45 @@ class Server() {
                 list.add("oricare")
                 for(carpatsSnashot in dataSnapshot.children){
                  list.add(carpatsSnashot.child("Nume").getValue().toString())
+                }
+                finishedCallback.callback(list)
+            }
+        }
+        ref.addListenerForSingleValueEvent(carpatsListener)
+    }
+
+    fun getRoutes(finishedCallback: SimpleCallback<ArrayList<Route>>){
+        var list : ArrayList<Route> = ArrayList()
+        var ref : DatabaseReference = FirebaseDatabase.getInstance().getReference("Arii")
+        Log.i("plm2","se fute")
+
+        val carpatsListener = object : ValueEventListener{
+            override fun onCancelled(p0: DatabaseError) {
+
+            }
+
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                Log.i("plm","se fute")
+                for(charpatsSnaphot in dataSnapshot.children){
+                    for(mountainsSnapshot in charpatsSnaphot.child("Munti").children){
+                        for(toursSnapshot in mountainsSnapshot.child("Trasee").children){
+                            var photo = toursSnapshot.child("Imagine").getValue().toString()
+                            var location = charpatsSnaphot.child("Nume").getValue().toString()+" "+ mountainsSnapshot.child("Nume").getValue().toString()+" "
+                            for ( judete in toursSnapshot.child("Judete").children){
+                                location += judete.getValue().toString()+" "
+                            }
+                            var activities : String = ""
+                            for(activity in toursSnapshot.child("Activitati").children){
+                                activities += activity.getValue().toString()+" "
+                            }
+                            var description : String = toursSnapshot.child("Descriere").getValue().toString()
+                            var duration : String = toursSnapshot.child("DurataMin").getValue().toString()+" - "+ toursSnapshot.child("DurataMax").getValue().toString()+"h"
+                            var level : String = toursSnapshot.child("Greutate").getValue().toString()
+
+                            var route = Route(photo,location,activities,description,duration,level)
+                            list.add(route)
+                        }
+                    }
                 }
                 finishedCallback.callback(list)
             }
@@ -147,8 +189,6 @@ class Server() {
         }
         ref.addListenerForSingleValueEvent(judeteListener)
     }
-
-
 
     fun getAvatarReference(uid: String) : StorageReference?{
         return storageReference.child("images").child(uid).child("avatar")
