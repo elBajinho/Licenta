@@ -90,7 +90,6 @@ class Server() {
     fun getRoutes(finishedCallback: SimpleCallback<ArrayList<Route>>){
         var list : ArrayList<Route> = ArrayList()
         var ref : DatabaseReference = FirebaseDatabase.getInstance().getReference("Arii")
-        Log.i("plm2","se fute")
 
         val carpatsListener = object : ValueEventListener{
             override fun onCancelled(p0: DatabaseError) {
@@ -98,7 +97,6 @@ class Server() {
             }
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                Log.i("plm","se fute")
                 for(charpatsSnaphot in dataSnapshot.children){
                     for(mountainsSnapshot in charpatsSnaphot.child("Munti").children){
                         for(toursSnapshot in mountainsSnapshot.child("Trasee").children){

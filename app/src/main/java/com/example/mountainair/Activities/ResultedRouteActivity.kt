@@ -28,7 +28,6 @@ class ResultedRouteActivity :AppCompatActivity(){
         server.getRoutes(object : SimpleCallback<ArrayList<Route>> {
             override fun callback(data: ArrayList<Route>) {
                 var list = data
-                Toast.makeText(context, "cea2",Toast.LENGTH_SHORT).show()
                 var adapter = RoutesAdapter(context, list)
                 resulted_route_recycler.layoutManager = LinearLayoutManager(context)
 

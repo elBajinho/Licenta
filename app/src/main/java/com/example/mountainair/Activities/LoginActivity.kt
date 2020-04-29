@@ -31,7 +31,7 @@ class LoginActivity : AppCompatActivity() {
                         startActivity(intent)
                         finish()
                     } else {
-                        Toast.makeText(baseContext, "fuck you go to hell and fuck you again",
+                        Toast.makeText(baseContext, "something went wrong",
                             Toast.LENGTH_SHORT).show()
                     }
                 }

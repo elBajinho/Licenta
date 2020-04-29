@@ -88,7 +88,7 @@ class RegisterActivity : AppCompatActivity(){
                     uploadAvatar(userId)
 
                 } else {
-                    Toast.makeText(baseContext, "Authentication failed. Fuck you and go to hell",
+                    Toast.makeText(baseContext, "Authentication failed",
                         Toast.LENGTH_SHORT).show()
                 }
             }
