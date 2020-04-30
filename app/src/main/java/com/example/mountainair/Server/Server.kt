@@ -124,7 +124,7 @@ class Server() {
         ref.addListenerForSingleValueEvent(carpatsListener)
     }
 
-    fun getMountains(finishedCallback: SimpleCallback<ArrayList<String>>){
+    fun getMountains(finishedCallback: SimpleCallback<ArrayList<String>>, charpats : String= ""){
         var list : ArrayList<String> = ArrayList()
         var ref : DatabaseReference = database.child("Arii")
 
@@ -136,6 +136,7 @@ class Server() {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 list.add("oricare")
                 for(carpatsSnashot in dataSnapshot.children){
+                    if(carpatsSnashot.child("Nume").getValue().toString().equals(charpats) || charpats.equals(""))
                     for(mountainsSnapshot in  carpatsSnashot.children){
                         for(finalSnapshot in mountainsSnapshot.children) {
                             list.add(finalSnapshot.child("Nume").getValue().toString())
@@ -148,7 +149,7 @@ class Server() {
         ref.addListenerForSingleValueEvent(mountainsListener)
     }
 
-    fun getPeaks(finishedCallback: SimpleCallback<ArrayList<String>>){
+    fun getPeaks(finishedCallback: SimpleCallback<ArrayList<String>>,mountains : String=""){
         var list : ArrayList<String> = ArrayList()
         var ref : DatabaseReference = database.child("Varfuri")
 
@@ -159,8 +160,10 @@ class Server() {
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 list.add("oricare")
+
                 for(peaksSnapshot in dataSnapshot.children){
-                    list.add(peaksSnapshot.child("Nume").getValue().toString())
+                        if(peaksSnapshot.child("Munte").getValue().toString().equals(mountains) || mountains.equals(""))
+                             list.add(peaksSnapshot.child("Nume").getValue().toString())
                 }
                 finishedCallback.callback(list)
             }
@@ -168,9 +171,10 @@ class Server() {
         ref.addListenerForSingleValueEvent(peaksListener)
     }
 
-    fun getJudete(finishedCallback: SimpleCallback<ArrayList<String>>){
+    fun getJudete(finishedCallback: SimpleCallback<ArrayList<String>>, peak : String = ""){
         var list : ArrayList<String> = ArrayList()
         var ref : DatabaseReference = database.child("Judete")
+        var ref2 : DatabaseReference = database.child("Arii")
 
         val judeteListener = object : ValueEventListener{
             override fun onCancelled(p0: DatabaseError) {
@@ -179,13 +183,35 @@ class Server() {
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 list.add("oricare")
-                for(judeteSnapshot in dataSnapshot.children){
-                    list.add(judeteSnapshot.child("Nume").getValue().toString())
-                }
+//                if(peak.equals(""))
+//                    for(judeteSnapshot in dataSnapshot.children){
+//                        list.add(judeteSnapshot.child("Nume").getValue().toString())
+//                    }
+//                else
+//                {
+                    for(carpatsSnashot in dataSnapshot.children){
+                        for(mountainsSnapshot in  carpatsSnashot.children){
+                            for(finalSnapshot in mountainsSnapshot.children) {
+                                for(traseeSnapshot in finalSnapshot.child("Trasee").children){
+                                    for(varfuriSnapshot in traseeSnapshot.child("Varfuri").children){
+                                        if(varfuriSnapshot.getValue().toString().equals(peak) || peak.equals("")){
+                                            for(judeteSnapshot in traseeSnapshot.child("Judete").children){
+                                                list.add(judeteSnapshot.getValue().toString())
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                //}
                 finishedCallback.callback(list)
             }
         }
-        ref.addListenerForSingleValueEvent(judeteListener)
+      //  if(peak.equals(""))
+        //     ref.addListenerForSingleValueEvent(judeteListener)
+        //else
+            ref2.addListenerForSingleValueEvent(judeteListener)
     }
 
     fun getAvatarReference(uid: String) : StorageReference?{

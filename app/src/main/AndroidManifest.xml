@@ -36,6 +36,8 @@
         </activity>
         <activity android:name=".Activities.ResultedRouteActivity">
         </activity>
+        <activity android:name=".Activities.IndependentRouteActivity">
+        </activity>
 
     </application>
 

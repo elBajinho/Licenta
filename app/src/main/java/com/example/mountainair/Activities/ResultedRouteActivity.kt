@@ -33,7 +33,6 @@ class ResultedRouteActivity :AppCompatActivity(){
 
                 resulted_route_recycler.adapter = adapter
                 Log.i("lista: ", list.toString())
-
             }
         })
     }

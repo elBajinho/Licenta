@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import android.widget.Toast
 import com.example.mountainair.Interfaces.SimpleCallback
 import com.example.mountainair.Model.GeographicSelection
 
@@ -43,25 +44,49 @@ class GeographicFragment : Fragment() {
         setCharpatsSpinner()
         setMountainsSpinner()
         setPeaksSpinner()
-        setJudeteSpinner()
+        setJudeteSpinner("")
 
         spinner_carphatic_region?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
-                spinner_carphatic_region.setSelection(0)
-                setMountainsSpinner()
-                setPeaksSpinner()
-                setJudeteSpinner()
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                if(position!=0) {
+                    setMountainsSpinner(carphatsList[position])
+                }
+                else {
+                    setMountainsSpinner()
 
+                }
             }
-
         }
 
+        spinner_mountains?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                if(position!=0)
+                    setPeaksSpinner(mountainList[position])
+                else
+                    setPeaksSpinner()
+            }
+        }
+
+        spinner_peak?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                if(position!=0)
+                    setJudeteSpinner(peaksList[position])
+                else
+                    setJudeteSpinner()
+            }
+        }
     }
 
-    private fun setJudeteSpinner() {
+    private fun setJudeteSpinner(peaks :String = "") {
         judeteList.add("oricare")
 
         server.getJudete(object : SimpleCallback<ArrayList<String>>{
@@ -75,11 +100,13 @@ class GeographicFragment : Fragment() {
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                 spinner_judete.adapter = adapter
             }
-        })
+        }, peaks)
     }
 
-    private fun setPeaksSpinner() {
+    private fun setPeaksSpinner(mountains: String= "") {
         peaksList.add("oricare")
+
+
         server.getPeaks(object : SimpleCallback<ArrayList<String>>{
             override fun callback(data: ArrayList<String>) {
                 peaksList = data
@@ -91,10 +118,10 @@ class GeographicFragment : Fragment() {
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                 spinner_peak.adapter = adapter
             }
-        })
+        }, mountains)
     }
 
-    private fun setMountainsSpinner() {
+    private fun setMountainsSpinner(charpats : String = "" ) {
         mountainList.add("oricare")
         server.getMountains(object : SimpleCallback<ArrayList<String>>{
             override fun callback(data: ArrayList<String>) {
@@ -107,7 +134,7 @@ class GeographicFragment : Fragment() {
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                 spinner_mountains.adapter = adapter
             }
-        })
+        }, charpats)
     }
 
     private fun setCharpatsSpinner() {

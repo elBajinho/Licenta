@@ -1,14 +1,19 @@
 package com.example.mountainair.Adapters
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.example.mountainair.Activities.IndependentRouteActivity
+import com.example.mountainair.Activities.ResultedRouteActivity
 import com.example.mountainair.Model.Post
 import com.example.mountainair.Model.PostToDisplay
 import com.example.mountainair.Model.Route
@@ -35,6 +40,13 @@ class RoutesAdapter(val context: Context, val routes : ArrayList<Route>) : Recyc
         Glide.with(context)
             .load(photoRef)
             .into(holder.photo)
+
+        holder.itemView.setOnClickListener{
+            var intent = Intent(context, IndependentRouteActivity :: class.java)
+            intent.putExtra("object",routes[position])
+            context.startActivity(intent)
+        }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
