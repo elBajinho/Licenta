@@ -3,6 +3,7 @@ package com.example.mountainair.Fragments
 import android.app.DatePickerDialog
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,7 @@ import android.widget.Toast
 
 import com.example.mountainair.R
 import kotlinx.android.synthetic.main.date_fragment.*
+import java.text.SimpleDateFormat
 import java.util.*
 
 class DateFragment : Fragment() {
@@ -39,11 +41,13 @@ class DateFragment : Fragment() {
         ) { view, year, month, day ->
             val msg = "You Selected: $day/$month/$year"
             Toast.makeText(context!! , msg, Toast.LENGTH_SHORT).show()
-            date = Date(year,month,day)
+
+            date = Date(year-1900,month,day,0,0,0)
         }
     }
 
     fun getDate() : Date{
+        Log.d("la return", date.toString())
         return date
     }
 }

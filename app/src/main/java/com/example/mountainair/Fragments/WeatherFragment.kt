@@ -7,11 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
-import android.widget.Toast
 import com.example.mountainair.Model.WheatherSelection
 
 import com.example.mountainair.R
-import kotlinx.android.synthetic.main.route_fragment.*
 import kotlinx.android.synthetic.main.weather_fragment.*
 
 class WeatherFragment : Fragment() {
@@ -87,7 +85,7 @@ class WeatherFragment : Fragment() {
         })
     }
 
-    fun getWheatherSelection() : WheatherSelection{
+    fun getWheatherSelection() : WheatherSelection {
         var rain : Boolean = false
         var foog : Boolean = false
         if(rainYes.isChecked){
@@ -98,11 +96,13 @@ class WeatherFragment : Fragment() {
             foog= true
         }
 
-        return WheatherSelection(seekBar_wheather_minWind.progress,
+        return WheatherSelection(
+            seekBar_wheather_minWind.progress,
             seekBar_wheather_maxWind.progress,
             seekbar_wheater_temp_min.progress,
             seekbar_wheater_temp_max.progress,
-            rain, foog)
+            rain, foog
+        )
 
     }
 }

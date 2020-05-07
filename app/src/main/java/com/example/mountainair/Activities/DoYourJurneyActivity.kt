@@ -2,18 +2,16 @@ package com.example.mountainair.Activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.example.mountainair.Adapters.DemoFragmentCollectionAdapter
+import com.example.mountainair.Model.Filters
 import com.example.mountainair.Model.GeographicSelection
 import com.example.mountainair.Model.RouteSelection
 import com.example.mountainair.Model.WheatherSelection
 import com.example.mountainair.R
-import java.util.*
+import java.util.Date
 
 
 class DoYourJurneyActivity : AppCompatActivity(){
@@ -32,15 +30,16 @@ class DoYourJurneyActivity : AppCompatActivity(){
     }
 
     fun goTo(){
-        //var activities : ArrayList<String> = adapter!!.getDemo1().getListOfActivities()
-        //var date  : Date = adapter!!.getDemo2().getDate()
-        //var gs : GeographicSelection = adapter!!.getDemo3().getGeographicSelection()
-        //var rs : RouteSelection = adapter!!.getDemo4().geRouteSelection()
-        //var ws : WheatherSelection = adapter!!.getDemo5().getWheatherSelection()
+        var activities : ArrayList<String> = adapter!!.getDemo1().getListOfActivities()
+        var date : Date = adapter!!.getDemo2().getDate()
+        var gs : GeographicSelection = adapter!!.getDemo3().getGeographicSelection()
+        var rs : RouteSelection = adapter!!.getDemo4().geRouteSelection()
+        var ws : WheatherSelection = adapter!!.getDemo5().getWheatherSelection()
         //Toast.makeText(this,ws.maxT.toString()+ " "+ ws.rain,Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, date.toString(), Toast.LENGTH_SHORT).show()
 
         val intent = Intent(this, ResultedRouteActivity :: class.java)
+        intent.putExtra("filters", Filters(activities,date,gs,rs,ws))
         startActivity(intent)
     }
-
 }

@@ -81,7 +81,7 @@ class RouteFragment : Fragment() {
         }
 
         if(medium_check.isChecked){
-            listOfDificulties.add("Medium")
+            listOfDificulties.add("Mediu")
         }
 
         if(hard_check.isChecked){
