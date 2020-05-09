@@ -3,8 +3,9 @@ package com.example.mountainair.Model
 import android.os.Parcel
 import android.os.Parcelable
 
-data class Route(var Image : String, var Location : String, var Activities : String, var Description : String, var Time : String, var Level : String) : Parcelable {
+data class Route(var Image : String, var Location : String, var Activities : String, var Description : String, var Time : String, var Level : String, var City: String="") : Parcelable {
     constructor(parcel: Parcel) : this(
+        parcel.readString().toString(),
         parcel.readString().toString(),
         parcel.readString().toString(),
         parcel.readString().toString(),
@@ -20,6 +21,7 @@ data class Route(var Image : String, var Location : String, var Activities : Str
         parcel.writeString(Description)
         parcel.writeString(Time)
         parcel.writeString(Level)
+        parcel.writeString(City)
     }
 
     override fun describeContents(): Int {

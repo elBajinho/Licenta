@@ -37,7 +37,7 @@ class ResultedRouteActivity :AppCompatActivity(){
         server.getRoutes(filter ,object : SimpleCallback<ArrayList<Route>> {
             override fun callback(data: ArrayList<Route>) {
                 var list = data
-                var adapter = RoutesAdapter(context, list)
+                var adapter = RoutesAdapter(context, list, filter.date)
                 resulted_route_recycler.layoutManager = LinearLayoutManager(context)
 
                 resulted_route_recycler.adapter = adapter

@@ -68,7 +68,9 @@
             android:layout_marginTop="30dp"
             android:layout_marginEnd="50dp"
             android:max="30"
-            android:min="0" />
+            android:min="0"
+            android:progress="30"
+            />
 
 
 
@@ -117,7 +119,8 @@
             android:layout_marginTop="30dp"
             android:layout_marginEnd="50dp"
             android:max="40"
-            android:min="0" />
+            android:min="0"
+            android:progress="40" />
 
         <RelativeLayout
             android:layout_height="wrap_content"

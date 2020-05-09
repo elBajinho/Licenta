@@ -78,7 +78,7 @@
         android:layout_alignTop="@+id/independent_route_level"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:text="Wheater this day: "
+        android:text="Wheater on selected day: "
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
@@ -108,7 +108,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/independent_route_rain_fog"
+                android:id="@+id/independent_route_rain"
                 android:text="Ploaie: "
                 ></TextView>
         </LinearLayout>
@@ -145,6 +145,7 @@
                 android:layout_width="30dp"
                 android:src="@drawable/ic_toys_black_24dp"
                 />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -152,8 +153,5 @@
                 android:text="Vantul:"
                 ></TextView>
         </LinearLayout>
-
     </LinearLayout>
-
-
 </RelativeLayout>

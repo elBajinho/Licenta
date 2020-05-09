@@ -23,8 +23,9 @@ import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
 import com.squareup.picasso.Picasso
 import org.w3c.dom.Text
+import java.util.Date
 
-class RoutesAdapter(val context: Context, val routes : ArrayList<Route>) : RecyclerView.Adapter<RoutesAdapter.ViewHolder>(){
+class RoutesAdapter(val context: Context, val routes : ArrayList<Route>, val date : Date) : RecyclerView.Adapter<RoutesAdapter.ViewHolder>(){
 
     override fun getItemCount()= routes.size
 
@@ -44,6 +45,13 @@ class RoutesAdapter(val context: Context, val routes : ArrayList<Route>) : Recyc
         holder.itemView.setOnClickListener{
             var intent = Intent(context, IndependentRouteActivity :: class.java)
             intent.putExtra("object",routes[position])
+
+            var currentDate : Date = Date()
+            var nextDate : Date = date
+            var nod = (nextDate.time -currentDate.time)/(1000 * 60 * 60 * 24)
+
+            intent.putExtra("nod",nod)
+
             context.startActivity(intent)
         }
 

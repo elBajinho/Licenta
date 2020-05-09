@@ -23,8 +23,6 @@ import retrofit2.Callback
 import retrofit2.Response
 
 import java.util.Date
-import java.util.concurrent.TimeUnit
-import java.util.stream.IntStream.range
 
 
 class Server() {
@@ -116,11 +114,11 @@ class Server() {
                                         ) {
                                             var weatherResponse : WeatherResponse
 
-                                            getWheather("Cluj", object : SimpleCallback<WeatherResponse> {
+                                            getWheather(toursSnapshot.child("Localitate").getValue().toString(), object : SimpleCallback<WeatherResponse> {
                                                 override fun callback(data: WeatherResponse) {
                                                     weatherResponse = data
-                                                    Log.i("vremea", weatherResponse.toString())
                                                     if(validWeather(filter.date,filter.ws, weatherResponse)) {
+                                                        var city = toursSnapshot.child("Localitate").getValue().toString()
                                                         var photo =
 
                                                             toursSnapshot.child("Imagine")
@@ -157,7 +155,8 @@ class Server() {
                                                                 activities,
                                                                 description,
                                                                 duration,
-                                                                level
+                                                                level,
+                                                                city
                                                             )
                                                         list.add(route)
                                                     Log.i("listaaa", list.toString())
@@ -176,29 +175,54 @@ class Server() {
         ref.addListenerForSingleValueEvent(carpatsListener)
         }
 
-
     private fun validWeather(date: Date, ws: WheatherSelection?, weatherResponse: WeatherResponse): Boolean {
 
         var currentDate : Date = Date()
         var nextDate : Date = date
-
         var nod = (nextDate.time -currentDate.time)/(1000 * 60 * 60 * 24)
+        var ok =true
+
 
         Log.i("zile :", nod.toString())
-
         var processedWeather : WheatherSelection = getWeatherProcessed(nod, weatherResponse)
 
-        Log.i("vremea procesata", processedWeather.toString())
 
-        return true
+        Log.i("vremea procesata", processedWeather.toString())
+        if(ws!!.rain==true && processedWeather.rain==true){
+            ok = false
+        }
+
+        if(processedWeather.maxT>ws.maxT){
+            ok = false
+        }
+
+        if(processedWeather.minT<ws.minT){
+            ok=false
+        }
+
+        if(processedWeather.maxW>ws.maxW){
+            ok=false
+        }
+
+        if(processedWeather.minW<ws.minW){
+            ok=false
+        }
+
+        return ok
     }
 
-    private fun getWeatherProcessed(nod: Long, wr: WeatherResponse): WheatherSelection {
+    fun getWeatherProcessed(nod: Long, wr: WeatherResponse): WheatherSelection {
         var weatherProcessed :WheatherSelection=WheatherSelection(30,0,30,0,false,false)
 
         weatherProcessed.rain=false
 
-        for (i in 8*nod..8*nod+7) {
+        var k = nod
+
+        if(k>4){
+            k= 4
+        }
+
+        for (i in 8*k..8*k+7) {
             var j= i.toInt()
 
             if(wr.list[j].main.temp_min-273.15<weatherProcessed.minT)
@@ -345,7 +369,8 @@ class Server() {
                                     for(varfuriSnapshot in traseeSnapshot.child("Varfuri").children){
                                         if(varfuriSnapshot.getValue().toString().equals(peak) || peak.equals("")){
                                             for(judeteSnapshot in traseeSnapshot.child("Judete").children){
-                                                list.add(judeteSnapshot.getValue().toString())
+                                                if(!list.contains(judeteSnapshot.getValue().toString()))
+                                                    list.add(judeteSnapshot.getValue().toString())
                                             }
                                         }
                                     }
@@ -407,7 +432,6 @@ class Server() {
             }
 
             override fun onFailure(call: Call<WeatherResponse>, t: Throwable) {
-                Log.i("vreme","nu merhe")
                 print(t.toString())
             }
         })
