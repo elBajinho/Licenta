@@ -27,7 +27,16 @@
         android:layout_height="405dp"
         android:layout_marginTop="50dp" />
 
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/activities_recycler"
+            android:layout_marginTop="435dp"
+            android:layout_centerHorizontal="true"
+            android:text="Swipe left" />
 
-</RelativeLayout>
+
+    </RelativeLayout>
 
 </FrameLayout>
