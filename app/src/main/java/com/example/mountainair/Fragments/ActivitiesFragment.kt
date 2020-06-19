@@ -6,16 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Adapter
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager.widget.ViewPager
 import com.example.mountainair.Adapters.ActivitiesFragmentAdapter
 import com.example.mountainair.Interfaces.SimpleCallback
 import com.example.mountainair.R
-import com.example.mountainair.Server.Server
-import com.google.firebase.database.*
-import kotlinx.android.synthetic.main.activity_post.*
+import com.example.mountainair.Server.Service
 import kotlinx.android.synthetic.main.fragment_activities.*
 
 
@@ -27,7 +22,7 @@ class ActivitiesFragment : Fragment() {
     }
 
     private lateinit var viewModel: ActivitiesFragmentViewModel
-    private var server : Server = Server()
+    private var service : Service = Service()
     private lateinit var activitiesAdapter : ActivitiesFragmentAdapter
 
     override fun onCreateView(
@@ -42,7 +37,7 @@ class ActivitiesFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(ActivitiesFragmentViewModel::class.java)
 
-        server.getActivities(object : SimpleCallback<ArrayList<String>>{
+        service.getActivities(object : SimpleCallback<ArrayList<String>>{
             override fun callback(data: ArrayList<String>) {
                 list = data
                 activities_recycler.layoutManager = LinearLayoutManager(context)

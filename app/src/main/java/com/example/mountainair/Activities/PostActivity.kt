@@ -2,7 +2,6 @@ package com.example.mountainair.Activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_post.*
 import android.app.Activity
@@ -11,8 +10,7 @@ import android.graphics.drawable.BitmapDrawable
 import android.widget.Toast
 import com.example.mountainair.Interfaces.SimpleCallback
 import com.example.mountainair.Model.Post
-import com.example.mountainair.Server.Server
-import com.google.android.gms.auth.api.signin.internal.Storage
+import com.example.mountainair.Server.Service
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
@@ -24,18 +22,17 @@ import java.io.ByteArrayOutputStream
 class PostActivity : AppCompatActivity(){
 
     var PICK_IMAGE : Int  = 1
-    private lateinit var imageView : ImageView
     var storage = Firebase.storage
     var storageRef = storage.reference
     var database: DatabaseReference = Firebase.database.reference
     var userId : String = FirebaseAuth.getInstance().getCurrentUser()!!.getUid()
-    var server : Server = Server()
+    var service : Service = Service()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(com.example.mountainair.R.layout.activity_post)
 
-        server.getUsernameWithUID(userId, object: SimpleCallback<String>{
+        service.getUsernameWithUID(userId, object: SimpleCallback<String>{
             override fun callback(data: String) {
                 post_username.text = data
             }

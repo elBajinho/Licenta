@@ -25,7 +25,7 @@ import retrofit2.Response
 import java.util.Date
 
 
-class Server() {
+class Service() {
     private lateinit var auth: FirebaseAuth
     private lateinit var database: DatabaseReference
     private lateinit var storageReference: StorageReference
@@ -95,15 +95,17 @@ class Server() {
         Log.d("geography",filter.gs.toString())
 
         val carpatsListener = object : ValueEventListener{
-            override fun onCancelled(p0: DatabaseError) {
-
-            }
+            override fun onCancelled(p0: DatabaseError) {}
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 for(charpatsSnaphot in dataSnapshot.children){
                     for(mountainsSnapshot in charpatsSnaphot.child("Munti").children){
                         for(toursSnapshot in mountainsSnapshot.child("Trasee").children){
-                            if(validGeograpfy(filter.gs,charpatsSnaphot.child("Nume").getValue().toString(), mountainsSnapshot.child("Nume").getValue().toString(), toursSnapshot.child("Varfuri").children,toursSnapshot.child("Judete").children)) {
+                            if(validGeography(filter.gs,
+                                    charpatsSnaphot.child("Nume").getValue().toString(),
+                                    mountainsSnapshot.child("Nume").getValue().toString(),
+                                    toursSnapshot.child("Varfuri").children,
+                                    toursSnapshot.child("Judete").children)) {
                                 if(validActivities(filter.activities,  toursSnapshot.child("Activitati").children )) {
                                     if (validRoute(
                                                 filter.rs,
@@ -114,27 +116,31 @@ class Server() {
                                         ) {
                                             var weatherResponse : WeatherResponse
 
-                                            getWheather(toursSnapshot.child("Localitate").getValue().toString(), object : SimpleCallback<WeatherResponse> {
+                                            getWheather(toursSnapshot.child("Localitate").getValue().toString(),
+                                                object : SimpleCallback<WeatherResponse> {
                                                 override fun callback(data: WeatherResponse) {
                                                     weatherResponse = data
+
                                                     if(validWeather(filter.date,filter.ws, weatherResponse)) {
                                                         var city = toursSnapshot.child("Localitate").getValue().toString()
-                                                        var photo =
-
-                                                            toursSnapshot.child("Imagine")
+                                                        var photo = toursSnapshot.child("Imagine")
                                                                 .getValue()
                                                                 .toString()
+
                                                         var location =
                                                             charpatsSnaphot.child("Nume").getValue().toString() + " " + mountainsSnapshot.child(
                                                                 "Nume"
                                                             ).getValue().toString() + " "
+
                                                         for (judete in toursSnapshot.child("Judete").children) {
                                                             location += judete.getValue().toString() + " "
                                                         }
+
                                                         var activities: String = ""
                                                         for (activity in toursSnapshot.child("Activitati").children) {
                                                             activities += activity.getValue().toString() + " "
                                                         }
+
                                                         var description: String =
                                                             toursSnapshot.child("Descriere")
                                                                 .getValue()
@@ -159,7 +165,6 @@ class Server() {
                                                                 city
                                                             )
                                                         list.add(route)
-                                                    Log.i("listaaa", list.toString())
                                                     finishedCallback.callback(list)
                                                     }
                                                 }
@@ -249,7 +254,7 @@ class Server() {
         return weatherProcessed
     }
 
-    private fun validGeograpfy(gs: GeographicSelection?, charpats: String, mountains: String, peaks: Iterable<DataSnapshot>, judete: Iterable<DataSnapshot>): Boolean {
+    private fun validGeography(gs: GeographicSelection?, charpats: String, mountains: String, peaks: Iterable<DataSnapshot>, judete: Iterable<DataSnapshot>): Boolean {
         var ok1 = true
         var ok2= gs!!.Peak.equals("oricare")
         var ok3= gs!!.Judet.equals("oricare")

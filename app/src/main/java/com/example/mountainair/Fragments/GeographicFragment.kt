@@ -8,18 +8,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Spinner
-import android.widget.Toast
 import com.example.mountainair.Interfaces.SimpleCallback
 import com.example.mountainair.Model.GeographicSelection
 
 import com.example.mountainair.R
-import com.example.mountainair.Server.Server
+import com.example.mountainair.Server.Service
 import kotlinx.android.synthetic.main.geographic_fragment.*
 
 class GeographicFragment : Fragment() {
 
-    var server : Server = Server()
+    var service : Service = Service()
     var judeteList : ArrayList<String> = ArrayList()
     var peaksList : ArrayList<String> = ArrayList()
     var mountainList : ArrayList<String> = ArrayList()
@@ -89,7 +87,7 @@ class GeographicFragment : Fragment() {
     private fun setJudeteSpinner(peaks :String = "") {
         judeteList.add("oricare")
 
-        server.getJudete(object : SimpleCallback<ArrayList<String>>{
+        service.getJudete(object : SimpleCallback<ArrayList<String>>{
             override fun callback(data: ArrayList<String>) {
                 judeteList = data
                 val adapter = ArrayAdapter<String>(
@@ -107,7 +105,7 @@ class GeographicFragment : Fragment() {
         peaksList.add("oricare")
 
 
-        server.getPeaks(object : SimpleCallback<ArrayList<String>>{
+        service.getPeaks(object : SimpleCallback<ArrayList<String>>{
             override fun callback(data: ArrayList<String>) {
                 peaksList = data
                 val adapter = ArrayAdapter<String>(
@@ -123,7 +121,7 @@ class GeographicFragment : Fragment() {
 
     private fun setMountainsSpinner(charpats : String = "" ) {
         mountainList.add("oricare")
-        server.getMountains(object : SimpleCallback<ArrayList<String>>{
+        service.getMountains(object : SimpleCallback<ArrayList<String>>{
             override fun callback(data: ArrayList<String>) {
                 mountainList = data
                 val adapter = ArrayAdapter<String>(
@@ -139,7 +137,7 @@ class GeographicFragment : Fragment() {
 
     private fun setCharpatsSpinner() {
         carphatsList.add("oricare")
-        server.getCharpats(object : SimpleCallback<ArrayList<String>>{
+        service.getCharpats(object : SimpleCallback<ArrayList<String>>{
             override fun callback(data: ArrayList<String>) {
                 carphatsList = data
                 val adapter = ArrayAdapter<String>(

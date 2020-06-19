@@ -10,16 +10,14 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.example.mountainair.Model.Post
 import com.example.mountainair.Model.PostToDisplay
 import com.example.mountainair.R
-import com.example.mountainair.Server.Server
-import com.squareup.picasso.Picasso
+import com.example.mountainair.Server.Service
 import kotlinx.android.synthetic.main.my_post_row.view.*
 
 class MyPostsAdapter(val context: Context, val posts : ArrayList<PostToDisplay>) : RecyclerView.Adapter<MyPostsAdapter.ViewHolder>(){
 
-    val server = Server()
+    val server = Service()
 
     override fun getItemCount()= posts.size
 

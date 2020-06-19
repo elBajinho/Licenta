@@ -1,30 +1,24 @@
 package com.example.mountainair.Activities
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.mountainair.Interfaces.SimpleCallback
-import com.example.mountainair.Interfaces.WeatherService
 import com.example.mountainair.Model.Route
 import com.example.mountainair.Model.Weather.WeatherResponse
 import com.example.mountainair.R
-import com.example.mountainair.Server.Server
-import com.example.mountainair.Server.WeatherServiceBuilder
+import com.example.mountainair.Server.Service
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
 import kotlinx.android.synthetic.main.activity_independent_route.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class IndependentRouteActivity : AppCompatActivity(){
 
     lateinit var route : Route
-    var server = Server()
+    var server = Service()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

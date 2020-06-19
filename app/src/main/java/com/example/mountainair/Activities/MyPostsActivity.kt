@@ -24,8 +24,8 @@ import kotlinx.android.synthetic.main.activity_my_posts.*
 import kotlinx.android.synthetic.main.fedd_main.*
 
 class MyPostsActivity : AppCompatActivity(){
-    lateinit var auth: FirebaseAuth
-    lateinit var storageReference: StorageReference
+    lateinit private var auth: FirebaseAuth
+    lateinit private var storageReference: StorageReference
     lateinit var database : DatabaseReference
     lateinit var context: Context
     var userId : String = " "
